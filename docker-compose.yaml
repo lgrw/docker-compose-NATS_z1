@@ -1,0 +1,81 @@
+version: '3.5'
+services:
+  cA.n1.local:
+    container_name: cA-n1
+    image: nats
+    dns_search: cA.local
+    environment:
+      GATEWAY: cA
+      NAME: cA-n1
+    networks:
+    - nats-clusterA
+    - shared
+    volumes:
+    - "./cluster.conf:/nats-server.conf"
+    ports:
+    - 10000:4222
+
+  cA.n2.local:
+    container_name: cA-n2
+    image: nats
+    dns_search:  cA.local
+    environment:
+      GATEWAY: cA
+      NAME: cA-n2
+    networks:
+    - nats-clusterA
+    - shared
+    volumes:
+    - "./cluster.conf:/nats-server.conf"
+    ports:
+    - 10001:4222
+
+  cB.n1.local:
+    container_name: cB-n1
+    image: nats
+    dns_search:  cB.local
+    environment:
+      GATEWAY: cB
+      NAME: cB-n1
+    networks:
+    - nats-clusterB
+    - shared
+    volumes:
+    - "./cluster.conf:/nats-server.conf"
+    ports:
+    - 10002:4222
+
+  cB.n2.local:
+    container_name: cB-n2
+    image: nats
+    dns_search: cB.local
+    environment:
+      GATEWAY: cB
+      NAME: cB-n2
+    networks:
+    - nats-clusterB
+    - shared
+    volumes:
+    - "./cluster.conf:/nats-server.conf"
+    ports:
+    - 10003:4222
+
+  cB.n3.local:
+    container_name: cB-n3
+    image: nats
+    dns_search: cB.local
+    environment:
+      GATEWAY: cB
+      NAME: cB-n3
+    networks:
+    - nats-clusterB
+    - shared
+    volumes:
+    - "./cluster.conf:/nats-server.conf"
+    ports:
+    - 10004:4222
+
+networks:
+  shared: {}
+  nats-clusterA: {}
+  nats-clusterB: {}
